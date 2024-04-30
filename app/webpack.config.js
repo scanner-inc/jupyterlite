@@ -60,10 +60,9 @@ function createShared(packageData, shared = null) {
   const extraShared = [];
   for (let pkg of extensionPackages) {
     let pkgShared = {};
-    let {
-      dependencies = {},
-      jupyterlab: { sharedPackages = {} } = {},
-    } = require(`${pkg}/package.json`);
+    let { dependencies = {}, jupyterlab: { sharedPackages = {} } = {} } = require(
+      `${pkg}/package.json`,
+    );
     for (let [dep, requiredVersion] of Object.entries(dependencies)) {
       if (!shared[dep]) {
         pkgShared[dep] = { requiredVersion };

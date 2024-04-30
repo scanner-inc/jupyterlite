@@ -30,7 +30,11 @@ import { ISettings, Settings } from '@jupyterlite/settings';
 
 import { ITranslation, Translation } from '@jupyterlite/translation';
 
-import { ILocalForage, ensureMemoryStorage } from '@jupyterlite/localforage';
+import {
+  ILocalForage,
+  ensureMemoryStorage,
+  ensureScnrStorage,
+} from '@jupyterlite/localforage';
 
 import localforage from 'localforage';
 
@@ -60,6 +64,18 @@ const localforageMemoryPlugin: JupyterLiteServerPlugin<void> = {
       );
       await ensureMemoryStorage(forage.localforage);
     }
+  },
+};
+
+const localforageScnrPlugin: JupyterLiteServerPlugin<void> = {
+  id: '@jupyterlite/server-extension:localforage-scnr-storage',
+  autoStart: true,
+  requires: [ILocalForage],
+  activate: async (app: JupyterLiteServer, forage: ILocalForage) => {
+    console.warn(
+      'Scnr storage fallback enabled: contents and settings may not be saved',
+    );
+    await ensureScnrStorage(forage.localforage);
   },
 };
 
@@ -595,6 +611,7 @@ const plugins: JupyterLiteServerPlugin<any>[] = [
   licensesPlugin,
   licensesRoutesPlugin,
   localforageMemoryPlugin,
+  localforageScnrPlugin,
   localforagePlugin,
   lspRoutesPlugin,
   nbconvertRoutesPlugin,
