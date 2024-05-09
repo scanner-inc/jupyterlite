@@ -34,7 +34,8 @@
     "@jupyterlab/coreutils": "~6.1.5",
     "@lumino/coreutils": "^2.1.2",
     "localforage": "^1.9.0",
-    "localforage-memoryStorageDriver": "^0.9.2"
+    "localforage-memoryStorageDriver": "^0.9.2",
+    "localforage-scnrStorageDriver": "file:../../../localForage-scnrStorageDriver"
   },
   "devDependencies": {
     "rimraf": "~5.0.1",

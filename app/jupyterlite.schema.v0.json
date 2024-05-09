@@ -318,6 +318,12 @@
           "description": "use the memory-based, volatile store: must be enabled with enableMemoryStorage",
           "type": "string",
           "enum": ["localStorageWrapper"]
+        },
+        {
+          "title": "scnr",
+          "description": "use the scanner backend",
+          "type": "string",
+          "enum": ["scnrStorageDriver"]
         }
       ]
     }
